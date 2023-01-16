@@ -7,21 +7,13 @@
 
 import Foundation
 
-// MARK: - Pokemon
-struct Pokemon {
-    let name: String
-    let location: String
-    let species: String
-    let image: String
-}
-
 // MARK: - Pokemons
 struct Pokemons: Codable {
-    let results: [Result]
+    let results: [Pokemon]
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Pokemon: Codable {
     let name: String
     let url: String
 }

@@ -18,7 +18,7 @@ enum PokemonList {
     enum ShowPokemons {
         // response
         struct Response {
-            let pokemons: [Pokemon]
+            let pokemons: [Character]
         }
         // viewModel
         struct ViewModel {
@@ -33,9 +33,9 @@ enum PokemonList {
                     100
                 }
                 
-                init(pokemon: Pokemon) {
+                init(pokemon: Character) {
                     name = pokemon.name
-                    image = pokemon.image
+                    image = pokemon.sprites.other.home.front_default
                 }
             }
             let rows: [PokemonCellViewModel]

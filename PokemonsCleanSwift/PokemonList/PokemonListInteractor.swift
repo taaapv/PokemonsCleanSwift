@@ -12,33 +12,22 @@ protocol PokemonListBusinessLogic {
 }
 
 protocol PokemonListDataStore {
-    var pokemons: [Pokemon] { get }
+    var pokemons: [Character] { get }
 }
 
 class PokemonListInteractor: PokemonListBusinessLogic, PokemonListDataStore {
     var presenter: PokemonListPresentationLogic?
-    var pokemonList: [Result] = []
-    var pokemons: [Pokemon] = []
+    var pokemons: [Character] = []
     
     func fetchPokemons() {
         NetworkManager.shared.fetch(dataType: Pokemons.self, urlString: Link.pokemons.rawValue) { [unowned self] pokemons in
-            self.pokemonList = pokemons.results
-        }
-        pokemonList.forEach { result in
-            DispatchQueue.global().async {
-                NetworkManager.shared.fetch(dataType: Character.self, urlString: result.url) { [unowned self] character in
-                    self.pokemons.append( Pokemon(
-                        name: character.name,
-                        location: character.locationAreaEncounters,
-                        species: character.species.name,
-                        image: character.sprites.other.home.front_default)
-                    )
+            pokemons.results.forEach { pokemon in
+                NetworkManager.shared.fetch(dataType: Character.self, urlString: pokemon.url) { [unowned self] character in
+                    self.pokemons.append(character)
                 }
             }
         }
-        DispatchQueue.main.async { [unowned self] in
-            let response = PokemonList.ShowPokemons.Response(pokemons: self.pokemons)
-            self.presenter?.presentPokemons(response: response)
-        }
+        let response = PokemonList.ShowPokemons.Response(pokemons: self.pokemons)
+        self.presenter?.presentPokemons(response: response)
     }
 }
