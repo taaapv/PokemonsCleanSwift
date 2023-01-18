@@ -22,9 +22,12 @@ class PokemonTableViewCell: UITableViewCell, CellModelRepresentable {
         guard let viewModel = viewModel as? PokemonCellViewModel else { return }
         var content = defaultContentConfiguration()
         content.text = viewModel.name
-        
-        ImageManager.shared.fetchImage(from: viewModel.image) { data in
-            content.image = UIImage(data: data)
+
+        NetworkManager.shared.fetch(dataType: Character.self, urlString: viewModel.url) { character in
+            ImageManager.shared.fetchImage(from: character.sprites.other.home.front_default) { data in
+                content.image = UIImage(data: data)
+                
+            }
         }
         contentConfiguration = content
     }

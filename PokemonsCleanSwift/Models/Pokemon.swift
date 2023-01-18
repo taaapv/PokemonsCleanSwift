@@ -12,7 +12,7 @@ struct Pokemons: Codable {
     let results: [Pokemon]
 }
 
-// MARK: - Result
+// MARK: - Pokemon
 struct Pokemon: Codable {
     let name: String
     let url: String
@@ -20,14 +20,7 @@ struct Pokemon: Codable {
 
 // MARK: - Character
 struct Character: Codable {
-    let locationAreaEncounters: String
-    let name: String
-    let species: Species
     let sprites: Sprites
-}
-
-struct Species: Codable {
-    let name: String
 }
 
 struct Sprites: Codable {

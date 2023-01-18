@@ -11,7 +11,7 @@ class ImageManager {
     static let shared = ImageManager()
     private init() {}
     
-    func fetchImage(from urlString: String?, completion: @escaping (Data) -> Void) {
+    func fetchImage(from urlString: String?, completion: @escaping(Data) -> Void) {
         guard let urlString = urlString else { return }
         guard let url = URL(string: urlString) else { return }
         
@@ -21,6 +21,5 @@ class ImageManager {
                 completion(imageData)
             }
         }
-        
     }
 }

@@ -18,13 +18,13 @@ enum PokemonList {
     enum ShowPokemons {
         // response
         struct Response {
-            let pokemons: [Character]
+            let pokemons: [Pokemon]
         }
         // viewModel
         struct ViewModel {
             struct PokemonCellViewModel: CellIdentifiable {
                 let name: String
-                let image: String
+                let url: String
                 
                 var cellIdentifier: String {
                     "pokemonCell"
@@ -33,9 +33,9 @@ enum PokemonList {
                     100
                 }
                 
-                init(pokemon: Character) {
+                init(pokemon: Pokemon) {
                     name = pokemon.name
-                    image = pokemon.sprites.other.home.front_default
+                    url = pokemon.url
                 }
             }
             let rows: [PokemonCellViewModel]
