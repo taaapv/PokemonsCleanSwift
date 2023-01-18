@@ -7,30 +7,27 @@
 
 import Foundation
 
-// MARK: - Pokemons
-struct Pokemons: Codable {
+struct Pokemons: Decodable {
     let results: [Pokemon]
 }
 
-// MARK: - Pokemon
-struct Pokemon: Codable {
+struct Pokemon: Decodable {
     let name: String
     let url: String
 }
 
-// MARK: - Character
-struct Character: Codable {
+struct Character: Decodable {
     let sprites: Sprites
 }
 
-struct Sprites: Codable {
+struct Sprites: Decodable {
     let other: Home
 }
 
-struct Home: Codable {
+struct Home: Decodable {
     let home: ImagePokemon
 }
 
-struct ImagePokemon: Codable {
+struct ImagePokemon: Decodable {
     let front_default: String
 }
